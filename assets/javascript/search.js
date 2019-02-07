@@ -17,9 +17,9 @@ var searches = [];
 
 
 function parks() {
-    var input = $('#input').val();
+    var input = $('#park-search-val').val();
     searches.push(input);
-    var parkCode = $('#input').val().substring(0,4);
+    var parkCode = $('#park-search-val').val().substring(0,4);
     console.log(parkCode);
 
     var queryURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' + parkCode + '&api_key=7saAAebFIxUpWP1IHtyJN3nKfo94xMzf009LSiHb';
@@ -42,13 +42,13 @@ function parks() {
             var website = $('<p>' + response.data[0].url + '</p>');
             var $info = $('<div id="info">');
             $info.append(description, directions, directionsURL, location, weather, website);
-            
+
             $('#search-results').append($name, $info);
         });
     
 };
 
-$('#search').on('click', function(){
+$('#park-search-btn').on('click', function(){
     event.preventDefault();
     parks();
 });
