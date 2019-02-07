@@ -15,17 +15,25 @@
 
 </head>
 <body>
-    <header></header>
-    <nav></nav>
-    <div id="main-img"></div>
-    <div class="search">
+    <div id="search" class="search">
+
+
         <form>
             <div class="form-group">
-                <label for="exampleInputPassword1">Search by National Park</label>
-                <input type="text" class="form-control" id="user-search" placeholder="National Park">
+                <label for="park-search-val">Search by National Park</label>
+                <input type="text" class="form-control" id="park-search-val"
+                    placeholder="National Park Name">
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button id="park-search-btn" class="btn btn-primary">Search</button>
         </form>
+    </div>
+
+    <div id="park-info">
+
+    </div>
+
+    <div id="weather-info">
+
     </div>
 
 
@@ -50,6 +58,8 @@
 
     <!-- moment js -->
     <script src="assets/javascript/moment.js"></script>
+    <!-- Kyle js -->
+    <script type="text/javascript" src="assets/javascript/current.js"></script>
 
 </body>
 </html>
