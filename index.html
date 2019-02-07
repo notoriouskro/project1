@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,65 @@
     <title>Footprint</title>
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
 
     <!-- stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
 
 
 </head>
+
 <body>
+
     <header></header>
     <nav></nav>
     <div id="main-img"></div>
-    <div class="search">
+    <div id="search" class="search">
         <form>
             <div class="form-group">
-                <label for="exampleInputPassword1">Search by National Park</label>
-                <input type="text" class="form-control" id="user-search" placeholder="National Park">
+                <label for="park-search-val">Search by National Park</label>
+                <input type="text" class="form-control" id="park-search-val" placeholder="Enter National Park Name">
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button id="park-search-btn" class="btn btn-primary">Search</button>
         </form>
     </div>
 
+    <div id="park-info">
 
+    </div>
+
+    <div id="weather-info">
+
+    </div>
+
+    <div id="itinerary">
+
+        <h1 id="itinerary-park-title"></h1>
+
+        <button id="itinerary-add-btn" class="btn btn-primary">Add</button>
+
+        <!-- table showing itinerary rows -->
+        <div id="itinerary-container" class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Trip Itinerary</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="itinerary-data">
+                        <div class="row itinerary-head" id="itinerary-head">
+                            <div class="col-lg-2">Park Name</div>
+                            <div class="col-lg-2 text-center">Start Date</div>
+                            <div class="col-lg-2 text-center">End Date</div>
+                            <div class="col-lg-1 text-center">Duration</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -52,4 +90,5 @@
     <script src="assets/javascript/moment.js"></script>
 
 </body>
+
 </html>
