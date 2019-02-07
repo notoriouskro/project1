@@ -53,23 +53,23 @@ $('#park-search-btn').on('click', function(){
     parks();
 });
 
-// function unsplash() {
-//     var input = $('#input').val().split('');
-//     console.log(input);
+function unsplash() {
+    var input = $('#input').val().split('');
+    console.log(input);
 
-//     var queryURL = 'https://api.unsplash.com/search/photos?page=1&query=' + input[0] + '&client_id=595205d0fab64dca9acc4912f7319d2869c29ff0834538b31167dbca9425a2f6&client_secret=00c14faa873902ff8dd494014545db17655595508ae0c67fe37a8774e4b7b45c';
+    var queryURL = 'https://api.unsplash.com/search/photos?page=1&query=' + input[0] + '&client_id=595205d0fab64dca9acc4912f7319d2869c29ff0834538b31167dbca9425a2f6&client_secret=00c14faa873902ff8dd494014545db17655595508ae0c67fe37a8774e4b7b45c';
 
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET",
-//         }).then(function(response){
-//             console.log(response);
-//             for(var i = 0; i < response.results.length; i++){
-//             $('#images').append('<img src="' + response.results[i].urls.regular + '">');
-//             }
-//         });
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        }).then(function(response){
+            console.log(response);
+            for(var i = 0; i < response.results.length; i++){
+            $('#images').append('<img src="' + response.results[i].urls.regular + '">');
+            }
+        });
 
-// };
+};
 
 // function trails() {
 //     var queryURL = 'https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200415723-df92bbbf592b6baa4ec5ef44ab0ffed8'
