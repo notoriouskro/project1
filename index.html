@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- stylesheet -->
-    <link rel="stylesheet" href="assets/css/style/css">
+    <!-- <link rel="stylesheet" href="assets/css/style/css"> -->
 
 
 </head>
@@ -21,11 +21,15 @@
     <div class="search">
         <form>
             <div class="form-group">
-                <label for="exampleInputPassword1">Search by National Park</label>
-                <input type="text" class="form-control" id="user-search" placeholder="National Park">
+                <label for="input">Search by National Park</label>
+                <input type="text" class="form-control" id="input" placeholder="National Park">
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button class="btn btn-primary" id="search">Search</button>
         </form>
+    </div>
+
+    <div id="search-results">
+
     </div>
 
 
