@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <title>Footprint</title>
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
 
     <!-- stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,7 +17,9 @@
 
 
 </head>
+
 <body>
+<<<<<<< HEAD
     <header>
         <h1>Footprint</h1>
         <p>your national park trip planner</p>
@@ -32,15 +36,67 @@
 
     <div id="search-results">
 
+=======
+
+    <header></header>
+    <nav></nav>
+    <div id="main-img"></div>
+    <div id="search" class="search">
+        <form>
+            <div class="form-group">
+                <label for="park-search-val">Search by National Park</label>
+                <input type="text" class="form-control" id="park-search-val" placeholder="Enter National Park Name">
+            </div>
+            <button id="park-search-btn" class="btn btn-primary">Search</button>
+        </form>
+>>>>>>> 2d8a4a08455429002136d164c6c14a647123e286
     </div>
 
+    <div id="park-info">
 
+    </div>
+
+    <div id="weather-info">
+
+    </div>
+
+    <div id="itinerary">
+
+        <h1 id="itinerary-park-title"></h1>
+
+        <button id="itinerary-add-btn" class="btn btn-primary">Add</button>
+
+        <!-- table showing itinerary rows -->
+        <div id="itinerary-container" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Trip Itinerary</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="itinerary-data">
+                        <div class="row itinerary-head" id="itinerary-head">
+                            <div class="col-md-6">Park Name</div>
+                            <div class="col-md-2 text-center">Start Date</div>
+                            <div class="col-md-2 text-center">End Date</div>
+                            <div class="col-md-1 text-center">Duration</div>
+                            <div class="col-md-1 text-center">Remove</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+
+    <!-- login js -->
+    <script src="assets/javascript/app.js"></script>
 
     <!-- login js -->
     <script src="assets/javascript/login.js"></script>
@@ -61,4 +117,5 @@
     <script src="assets/javascript/parks.js"></script>
 
 </body>
+
 </html>
