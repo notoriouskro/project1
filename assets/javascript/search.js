@@ -38,11 +38,10 @@ function parks() {
             var description = $('<p>' + response.data[0].description + '</p>');
             var directions = $('<p>' + response.data[0].directionsInfo + '</p>');
             var directionsURL = $('<p>' + response.data[0].directionsUrl + '</p>');
-            var location = $('<p>' + response.data[0].latLong + '</p>');
             var weather = $('<p>' + response.data[0].weatherInfo + '</p>');
             var website = $('<p>' + response.data[0].url + '</p>');
             var $info = $('<div id="info">');
-            $info.append(description, directions, directionsURL, location, weather, website);
+            $info.append(description, directions, directionsURL, weather, website);
 
             $('#search-results').append($name, $info);
             latLong = response.data[0].latLong;
@@ -90,24 +89,19 @@ function trails() {
             for(var i = 0; i < response.trails.length; i++){
                 var $trails = $('<div id="trails">');
 
-                var $img = $('<img>');
-                var img = response.trails[i].imgSmall;
-                $img.attr('src="' + img + '">');
+                var $img = $('<img src="' + response.trails[i].imgSqSmall + '">');
                 $trails.append($img);
 
                 var $div = $('<div>');
                 var name = $('<p>' + response.trails[i].name + '</p>');
+                var description = $('<p>' + response.trails[i].summary + '</p>');
                 var difficulty = $('<p>' + response.trails[i].difficulty + '</p>');
                 var length = $('<p>' + response.trails[i].length + '</p>');
                 var ascent = $('<p>' + response.trails[i].ascent + '</p>');
                 var altitude = $('<p>' + response.trails[i].high + '</p>');
-                var description = $('<p>' + response.trails[i].summary + '</p>');
-                $div.append(name, difficulty, length, ascent, altitude, description);
+                var url = $('<a href="' + response.trails[i].url + '">View Trail Map</a>');
+                $div.append(name, description, difficulty, length, ascent, altitude, url);
                 $trails.append($div);
-
-                var url = response.trails[i].url;
-                var $trailMap = $('<iframe width="600" height="450" frameborder="0" style="border:0" src="' + url +'" allowfullscreen>');
-                $trails.append($trailMap);
 
                 $('#search-results').append($trails);
             }
