@@ -83,6 +83,8 @@ function parks(element) {
             appObj.lastParkLat = lat;
             appObj.lastParkLong = long;
 
+            weatherObj.getWeather()
+
             trails();
         });
 };
