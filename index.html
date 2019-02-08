@@ -15,17 +15,17 @@
 
 </head>
 <body>
-    <header></header>
+    <header>
+        <h1>Footprints</h1>
+        <p>your national park trip planner</p>
+    </header>
     <nav></nav>
     <div id="main-img"></div>
-    <div class="search">
-        <form>
-            <div class="form-group">
-                <label for="park-search-val">Search by National Park</label>
-                <input type="text" class="form-control" id="park-search-val" placeholder="Enter National Park Name">
-            </div>
-            <button class="btn btn-primary" id="park-search-btn">Search</button>
-        </form>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn" id="park-search-btn" class="dropbtn">Find a Park</button>
+        <div id="myDropdown" class="dropdown-content">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+        </div>
     </div>
 
     <div id="search-results">
@@ -54,6 +54,9 @@
 
     <!-- moment js -->
     <script src="assets/javascript/moment.js"></script>
+
+    <!-- parks.js -->
+    <script src="assets/javascript/parks.js"></script>
 
 </body>
 </html>
