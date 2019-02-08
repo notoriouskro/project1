@@ -25,32 +25,28 @@ function myFunction() {
     dropdown();
 };
 
-// function filterFunction() {
-//     var input = $('#myInput').val();
-//     var filter = input.toUpperCase();
-//     for (var i = 0; i < parkNames.length; i++) {
-//         var txtValue = $('<p>').val();
-//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-//         $('<p>').css({'display': ''});
-//         } else {
-//         $('<p>').css({'display':'none'});
-//         }
-//     }
-// };
+function filterFunction() {
+    var input = $('#myInput').val();
+    var filter = input.toUpperCase();
+    for (var i = 0; i < $('#myDropdown').length; i++) {
+        var txtValue = $('<p>').text();
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        $('<p>').css({'display': ''});
+        } else {
+        $('<p>').css({'display':'none'});
+        }
+    }
+};
 
-// $('#myInput').on('keyup', filterFunction);
+$('#myInput').on('keyup', filterFunction);
 
 function parks(element) {
-    var input = element.text();
-    console.log(input);
+    var parkName = element.text();
+    console.log(parkName);
 
-    var position = parkNames.indexOf(input);
+    var position = parkNames.indexOf(parkName);
     var parkCode = parkCodes[position];
-    // var parkCode = $('#park-search-val').val().substring(0,4);
     console.log(parkCode);
-
-    $addBtn = $('<button>');
-    $addBtn.attr({'park-name': input, 'park-code': parkCode});
 
     var queryURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' + parkCode + '&api_key=7saAAebFIxUpWP1IHtyJN3nKfo94xMzf009LSiHb';
 
@@ -75,6 +71,18 @@ function parks(element) {
             $('#search-results').append($name, $info);
             latLong = response.data[0].latLong;
 
+            var input = latLong.split(',');
+            console.log(input);
+            var lat = input[0].substring(4,16);
+            console.log('latitude: ' + lat);
+            var long = input[1].substring(6,18);
+            console.log('longitude: ' + long);
+
+            appObj.lastParkCode = parkCode;
+            appObj.lastParkName = parkName;
+            appObj.lastParkLat = lat;
+            appObj.lastParkLong = long;
+
             trails();
         });
 };
@@ -97,15 +105,8 @@ function unsplash(element) {
 };
 
 function trails() {
-    var input = latLong.split(',');
-    console.log(input);
-    var lat = input[0].substring(4,16);
-    console.log('latitude: ' + lat);
-    var long = input[1].substring(6,18);
-    console.log('longitude: ' + long);
-
-    $addBtn.attr({'latitude': lat, 'longitude': long});
-
+    var lat = appObj.lastParkLat;
+    var long = appObj.lastParkLong;
     var queryURL = 'https://www.hikingproject.com/data/get-trails?lat='+ lat + '&lon=' + long + '&maxDistance=10&key=200415723-df92bbbf592b6baa4ec5ef44ab0ffed8';
 
     $.ajax({
@@ -142,7 +143,9 @@ function trails() {
 $('#park-search-btn').on('click', myFunction);
 
 $('#myDropdown').on('click', 'p.list', function() {
+    $('#myDropdown').toggle('hide');
     parks($(this));
     unsplash($(this));
+
 });
 
