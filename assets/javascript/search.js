@@ -38,8 +38,7 @@ function filterFunction() {
     }
 };
 
-function unsplash(element) {
-    var input = element.text();
+function unsplash(input) {
     console.log('unsplash: ' + input);
 
     var queryURL = 'https://api.unsplash.com/search/photos?orientation=landscape&page=1&query=' + input + '&client_id=595205d0fab64dca9acc4912f7319d2869c29ff0834538b31167dbca9425a2f6&client_secret=00c14faa873902ff8dd494014545db17655595508ae0c67fe37a8774e4b7b45c';
@@ -47,20 +46,22 @@ function unsplash(element) {
     $.ajax({
         url: queryURL,
         method: "GET",
-        }).then(function(response){
-            console.log(response);
-            for(var i = 0; i < 1; i++){
-            var mainImg = $('<div id="main-img-container">');
-            mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
-            $('#main-image').append(mainImg);
-            }
-        });
+    }).then(function(response){
+        console.log(response);
+        for(var i = 0; i < 1; i++){
+            var $img = $('<img>');
+            $img.attr({class: 'main-img'});
+            console.log('regular',response.results[i].urls.regular);
+            $img.attr({src: response.results[i].urls.regular});
+            $('#main-img-container').append($img);
+        }
+    });
 };
 
 $('#myInput').on('keyup', filterFunction);
 
-function parks(element) {
-    var parkName = element.text();
+function parks(parkName) {
+    // var parkName = element.text();
     console.log(parkName);
 
     var position = parkNames.indexOf(parkName);
@@ -72,64 +73,58 @@ function parks(element) {
     $.ajax({
         url: queryURL,
         method: "GET",
-        }).then(function(response){
-            console.log(response);
-        
-            var name = response.data[0].name;
-            var $name = $('<h1 id="h1-park">');
-            $name.text(name);
+    }).then(function(response){
+        console.log(response);
+    
+        var name = response.data[0].name;
+        var $name = $('<h1>');
+        $name.attr({id:'h1-park'});
+        $name.text(name);
+        $('#search-results').append($name);
 
-            var description = $('<p>' + response.data[0].description + '</p>');
-            var directions = $('<p>' + response.data[0].directionsInfo + '</p>');
-            var directionsURL = $('<a href="' + response.data[0].directionsUrl + '">Directions<a>');
-            var weather = $('<p>' + response.data[0].weatherInfo + '</p>');
-            var website = $('<a href="' + response.data[0].url + '">Park Website<a>');
-            var $info = $('<div id="info">');
-            $info.append(description, directions, directionsURL, weather, website);
+        var description = $('<p>');
+        description.text(response.data[0].description);
 
-            $('#search-results').append($name, $info);
-            var latLong = response.data[0].latLong;
+        var directions = $('<p>');
+        directions.text(response.data[0].directionsInfo);
 
-            var input = latLong.split(',');
-            console.log(input);
-            var lat = input[0].substring(4,16);
-            console.log('latitude: ' + lat);
-            var long = input[1].substring(6,18);
-            console.log('longitude: ' + long);
+        var directionsURL = $('<a>');
+        directionsURL.attr({href: response.data[0].directionsUrl});
+        directionsURL.text('Park Directions');
 
-            trails();
+        var weather = $('<p>');
+        weather.text(response.data[0].weatherInfo);
 
-            appObj.lastParkCode = parkCode;
-            appObj.lastParkName = parkName;
-            appObj.lastParkLat = lat;
-            appObj.lastParkLong = long;
+        var website = $('<a>');
+        website.attr({href: response.data[0].url});
 
-            weatherObj.getWeather()
+        var $info = $('<div>');
+        $info.attr({id:'info'});
+        $info.append(description, directions, directionsURL, weather, website);
 
-            trails();
+        $('#search-results').append($info);
 
-            $('#itinerary-add-btn').prop('disabled', false);
-            
-        });
-};
+        var latLong = response.data[0].latLong;
+        var input = latLong.split(',');
+        console.log(input);
+        var lat = input[0].substring(4,16);
+        console.log('latitude: ' + lat);
+        var long = input[1].substring(6,18);
+        console.log('longitude: ' + long);
 
-function unsplash(element) {
-    var input = element.text();
-    console.log('unsplash: ' + input);
+        appObj.lastParkCode = parkCode;
+        appObj.lastParkName = parkName;
+        appObj.lastParkLat = lat;
+        appObj.lastParkLong = long;
 
-    var queryURL = 'https://api.unsplash.com/search/photos?page=1&query=' + input + '&client_id=595205d0fab64dca9acc4912f7319d2869c29ff0834538b31167dbca9425a2f6&client_secret=00c14faa873902ff8dd494014545db17655595508ae0c67fe37a8774e4b7b45c';
+        // weatherObj.getWeather()
 
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-        }).then(function(response){
-            console.log(response);
-            for(var i = 0; i < 1; i++){
-                var mainImg = $('<div id="main-img-container">');
-                mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
-                $('#main-image').append(mainImg);
-            }
-        });
+        $('#itinerary-add-btn').prop('disabled', false);
+
+        weatherObj.callHomeWeather();
+
+        trails();
+    });
 };
 
 function trails() {
@@ -141,30 +136,30 @@ function trails() {
         url: queryURL,
         method: "GET",
         crossOrigin: true,
-        }).then(function(response){
-            console.log(response);
-            for(var i = 0; i < response.trails.length; i++){
-                var $trail = $('<div id="trail">');
+    }).then(function(response){
+        console.log(response);
+        for(var i = 0; i < response.trails.length; i++){
+            var $trail = $('<div id="trail">');
 
-                var $img = $('<img id="trail-img" src="' + response.trails[i].imgSqSmall + '">');
+            var $img = $('<img id="trail-img" src="' + response.trails[i].imgSqSmall + '">');
 
-                var $divSummary = $('<div id="summary">');
-                var $divDetails = $('<div id="details">');
-                var name = $('<h3>' + response.trails[i].name + '</h3>');
-                var description = $('<p>' + response.trails[i].summary + '</p>');
-                var difficulty = $('<p>Difficulty: ' + response.trails[i].difficulty + '</p>');
-                var length = $('<p>Length: ' + response.trails[i].length + 'mi</p>');
-                var ascent = $('<p>Ascent: ' + response.trails[i].ascent + 'ft</p>');
-                var altitude = $('<p>Highest Point: ' + response.trails[i].high + 'ft</p>');
-                var url = $('<a href="' + response.trails[i].url + '">View Trail Map</a>');
-                $divSummary.append(name, description) 
-                $divDetails.append(difficulty, length, ascent, altitude, url);
-                $trail.append($divSummary, $divDetails, $img);
-                $allTrails = $('<div id="all-trails"');
-                $allTrails.append($trail);
-            }
-            $('#search-results').append($allTrails);
-        });
+            var $divSummary = $('<div id="summary">');
+            var $divDetails = $('<div id="details">');
+            var name = $('<h3>' + response.trails[i].name + '</h3>');
+            var description = $('<p>' + response.trails[i].summary + '</p>');
+            var difficulty = $('<p>Difficulty: ' + response.trails[i].difficulty + '</p>');
+            var length = $('<p>Length: ' + response.trails[i].length + 'mi</p>');
+            var ascent = $('<p>Ascent: ' + response.trails[i].ascent + 'ft</p>');
+            var altitude = $('<p>Highest Point: ' + response.trails[i].high + 'ft</p>');
+            var url = $('<a href="' + response.trails[i].url + '">View Trail Map</a>');
+            $divSummary.append(name, description) 
+            $divDetails.append(difficulty, length, ascent, altitude, url);
+            $trail.append($divSummary, $divDetails, $img);
+            $allTrails = $('<div id="all-trails"');
+            $allTrails.append($trail);
+        }
+        $('#search-results').append($allTrails);
+    });
 };
 
 $('#park-search-btn').on('click', function(){
@@ -176,8 +171,8 @@ $('#park-search-btn').on('click', function(){
     $('#navbarDropdown').css({'display':'block'});
     $('#initial').css({'display':'none'});
     console.log('dropdown-click',this);
-    unsplash($(this));
-    parks($(this));
+    unsplash($(this).text());
+    parks($(this).text());
 });
 
 $('#navbarDropdown').on('click', function(){
@@ -187,11 +182,12 @@ $('#navbarDropdown').on('click', function(){
 $('#myDropdown').on('click', 'p.list', function() {
     $('#search-results').empty();
     $('#myDropdown').toggle('hide');
-    unsplash($(this));
-    parks($(this));  
+    unsplash($(this).text());
+    parks($(this).text());  
 });
 
 $('.navbar-brand').on('click', function(){
     $('#search-results').empty();
     $('#initial').css({'display':'inline'});
+    $('#navbarDropdown').css({'display':'none'});
 });

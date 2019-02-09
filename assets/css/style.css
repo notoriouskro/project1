@@ -9,10 +9,14 @@
 }
 
 #myDropdown {
+    background-color: rgba(255,255,255,.8);
     width: 200px;
     max-height: 500px;
     overflow: scroll;
-    padding: 20px;
+}
+
+.list {
+    padding: 10px;
 }
 
 .list:hover {
@@ -55,26 +59,29 @@ i {
 }
 
 #main-img-container {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 750px;
     overflow: hidden;
     z-index: 1;
 }
 
-#h1-park{
+.main-img {
+    width: 100%;
+}
+
+#h1-park {
     font-size: 72pt;
     font-weight: normal;
     font-family: 'Martel', serif;
-    position: absolute;
-    top: 250px;
+    position: relative;
+    top: -600px;
     z-index: 2;
-    color: white
+    color: white;
 }
 
-.main-img {
-    position: absolute;
-    width: 100%;
+#itinerary-add-btn {
+
 }
 
 .container {
@@ -90,20 +97,20 @@ i {
 }
 
 #all-trails {
-    position: absolute;
+    position: relative;
     top: 1500px;
     height: 200px;
     overflow: scroll;
 }
 
-#weather-info {
+/* #weather-info {
     position: absolute;
-    top: 2000px;
-}
+} */
 
 #itinerary {
     position: absolute;
-    top: 2300px;
+    top: 1500px;
+    width: 100%;
 }
 
 
@@ -111,7 +118,7 @@ i {
 #trail-img {
     float: left;
 }
-#weatherDiv{
+#home-weather-info{
     float: left;
     margin: 15px;
     padding: 15px;
@@ -130,7 +137,7 @@ h3 {
 
 #itinerary-container {
     background-color: rgba(30, 39, 22, .2);
-    width: 60%;
+    width: 100%;
     margin-bottom: 100px;
 }
 .itinerary-view-head .itinerary-view {
