@@ -105,7 +105,6 @@ function parks(element) {
             appObj.lastParkLong = long;
 
             weatherObj.getWeather()
-<<<<<<< HEAD
 
             trails();
 
@@ -130,10 +129,6 @@ function unsplash(element) {
                 mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
                 $('#main-image').append(mainImg);
             }
-=======
-
-            
->>>>>>> 218c5989ae932184ac9e86cc90a0cf4932d6aa20
         });
 };
 
@@ -174,7 +169,6 @@ function trails() {
 
 $('#park-search-btn').on('click', function(){
     myFunction1();
-<<<<<<< HEAD
 
 });$('#myDropdown1').on('click', 'p.list', function() {
     $('#search-results').empty();
@@ -188,28 +182,6 @@ $('#park-search-btn').on('click', function(){
 
 $('#navbarDropdown').on('click', function(){
     myFunction();
-=======
-
-});$('#myDropdown1').on('click', 'p.list', function() {
-    $('#search-results').empty();
-    $('#myDropdown1').toggle('hide');
-    $('#navbarDropdown').css({'display':'block'});
-    $('#initial').css({'display':'none'});
-    unsplash($(this));
-    parks($(this));
-});
-
-$('#navbarDropdown').on('click', function(){
-    myFunction();
-});
-
-$('#myDropdown').on('click', 'p.list', function() {
-    $('#search-results').empty();
-    $('#myDropdown').toggle('hide');
-    unsplash($(this));
-    parks($(this));
-    
->>>>>>> 218c5989ae932184ac9e86cc90a0cf4932d6aa20
 });
 
 $('#myDropdown').on('click', 'p.list', function() {
