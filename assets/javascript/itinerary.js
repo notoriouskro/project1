@@ -1,43 +1,36 @@
 
-
-// Initialize Firebase
-var config = {
-    apiKey: 'AIzaSyAUbsJcyadBDoOGF24ajS7SC3Q7KweP_AY',
-    authDomain: 'bootcamp-project1-504c8.firebaseapp.com',
-    databaseURL: 'https://bootcamp-project1-504c8.firebaseio.com',
-    projectId: 'bootcamp-project1-504c8',
-    storageBucket: '',
-    messagingSenderId: '452720723166'
-};
-firebase.initializeApp(config);
-
-//connect to database
-var database = firebase.database();
-
-// itineraryObj.assignAdd();
-
 var itineraryObj = {
 
-    assignAdd: function (parkIdx) {
-        var parkName = parkNames[parkIdx];  //[Math.floor(Math.random() * parkNames.length)];
-        console.log('parkIdx', parkIdx, 'parkName', parkName);
-        $('#park-title').text(parkName);
-        $('#itinerary-add-btn').attr('park-name', parkName);
-    },
+    // assignAdd: function (parkIdx) {
+    //     var parkName = parkNames[parkIdx];  //[Math.floor(Math.random() * parkNames.length)];
+    //     console.log('parkIdx', parkIdx, 'parkName', parkName);
+    //     $('#park-title').text(parkName);
+    //     $('#itinerary-add-btn').attr('park-name', parkName);
+    // },
+
     doRefresh: function (snapshot) {
 
         var row = $('<div>');
         var key = snapshot.key;
         console.log('key', key);
-        row.attr({ class: 'row itinerary-row', id: key });
+        row.attr({ class: 'row itinerary-data-row', id: key });
 
-        var itineraryName = $('<div>');
-        itineraryName.attr({ class: 'col-md-6' });
-        itineraryName.text(snapshot.val().itineraryName);
-        row.append(itineraryName);
+        var buttdiv = $('<div>');
+        buttdiv.attr({ class: 'col-md-1' });
+
+        var button = $('<button>');
+        button.attr({ type: 'button', class: 'btn btn-primary align-self-center', 'data-toggle': 'modal', 'data-target': '#editItinModal', 'data-key': key });
+        button.text('Edit');
+        buttdiv.append(button);
+        row.append(buttdiv);
+
+        var parkName = $('<div>');
+        parkName.attr({ class: 'col-md-5' });
+        parkName.text(snapshot.val().parkName);
+        row.append(parkName);
 
         var itineraryStart = $('<div>');
-        itineraryStart.attr({ class: 'col-md-2' });
+        itineraryStart.attr({ class: 'col-md-2 text-center' });
         itineraryStart.text(snapshot.val().itineraryStart);
         row.append(itineraryStart);
 
@@ -58,16 +51,19 @@ var itineraryObj = {
 
         //append to row
         $('#itinerary-data').append(row);
-        //set buttons
+
+        //set edit buttons
         $('.itinerary-remove').on('click', itineraryObj.remove);
-        $('.itinerary-row').on('click', itineraryObj.select);
+
+        // $('.itinerary-data-row').on('click', itineraryObj.select);
     },
     remove: function () {
         var key = $(this).attr('removekey');
         $('#' + key).remove();
         database.ref().child(key).remove();
     },
-    select: function () {
+    select: function (event) {
+
         var key = $(this).attr('id');
         console.log(key);
         // $('#itinerary-add-btn').attr({ datakey: key }); //set the submit key
@@ -76,9 +72,9 @@ var itineraryObj = {
             //open modal form
 
             //get weather
-        // weatherObj.getWeather(parkLat,parkLong,startDate,endDate);
+            // weatherObj.getWeather(parkLat,parkLong,startDate,endDate);
             //hold for modal form
-            // $('#itinerary-name').val(snapshot.val().itineraryName);
+            // $('#itinerary-name').val(snapshot.val().parkName);
             // $('#itinerary-start').val(snapshot.val().itineraryStart);
             // $('#itinerary-end').val(snapshot.val().itineraryEnd);
             // $('#itinerary-duration').val(snapshot.val().itineraryDuration);
@@ -87,35 +83,28 @@ var itineraryObj = {
     }
 };
 
-$('#park-search-btn').on('click', function () {
-    event.preventDefault();
-    var parkName = $('#park-search-val').val();
-    console.log('parkNamesearchval', parkName);
-    var parkIdx = parkNames.indexOf(parkName);
-    itineraryObj.assignAdd(parkIdx);
-    $('#park-search-val').attr('placeholder', 'Enter National Park Name'); //reset search field to placeholder
-});
-
-if (false) { //hold for on click button that saves edit on modal form
-    var postData = {
-        parkCode: parkCode,
-        parkName: parkName,
-        parkLat: parkLat,
-        parkLong: parkLong,
-        itineraryStart: itineraryStart,
-        itineraryEnd: itineraryEnd,
-        itineraryDuration: itineraryDuration
-    };
-    var updates = {};
-    updates[datakey] = postData;
-    return firebase.database().ref().update(updates);
-}
+// if (false) { //hold for on click button that saves edit on modal form
+//     var postData = {
+//         parkCode: parkCode,
+//         parkName: parkName,
+//         parkLat: parkLat,
+//         parkLong: parkLong,
+//         itineraryStart: itineraryStart,
+//         itineraryEnd: itineraryEnd,
+//         itineraryDuration: itineraryDuration
+//     };
+//     var updates = {};
+//     updates[datakey] = postData;
+//     return firebase.database().ref().update(updates);
+// }
 
 //open modal dialog
 
 $('#itinerary-add-btn').on('click', function () {
 
     event.preventDefault();
+
+    $('#itinerary-add-btn').prop('disabled', true);
 
     //add form data 
     var parkCode = appObj.lastParkCode;
@@ -143,3 +132,35 @@ database.ref().on('child_added', function (snapshot) {
 }, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
 });
+
+$('#editItinModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var key = button.data('key'); // Extract info from data-* attributes
+    console.log(key);
+    // $('#itinerary-add-btn').attr({ datakey: key }); //set the submit key
+    var row = database.ref().child(key);
+    row.once('value').then(function (snapshot) {
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this);
+        $('#editItinModalLabel').text(snapshot.val().parkName);
+        $('#datepicker').val(snapshot.val().itineraryStart);
+        $('#end-date').val(snapshot.val().itineraryEnd);
+        $('#num-days').val(snapshot.val().itineraryDuration);
+        //open modal form
+
+        //get weather
+        // weatherObj.getWeather(parkLat,parkLong,startDate,endDate);
+        //hold for modal form
+        // $('#itinerary-name').val(snapshot.val().parkName);
+        // $('#itinerary-start').val(snapshot.val().itineraryStart);
+        // $('#itinerary-end').val(snapshot.val().itineraryEnd);
+        // $('#itinerary-duration').val(snapshot.val().itineraryDuration);
+
+    });
+
+
+});
+
+$("#datepicker").datepicker();
+$("#end-date").datepicker();

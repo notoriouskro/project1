@@ -3,7 +3,7 @@
 var parkLat = ['38.88101431', '47.17777274', '29.31262089'];
 var parkLong = ['77.03632572', '103.4300083', '-98.4289522'];
 var idx = 2;
-var days = '4';
+// var days = '4';
 var startDate = '02/12/2019';
 var endDate = '02/12/2019';
 
@@ -36,8 +36,8 @@ var weatherObj = {
 
             $('#weather-info').html("Time zone: " + response.response[0].profile.tz);
 
-            var length = days;
-            for (i = 0; i < length; i++) {
+            // var length = days;
+            for (i = 0; i < response.response.length; i++) {
 
                 var div = $('<div>');
                 div.attr('id', 'weatherDiv');
