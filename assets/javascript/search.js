@@ -1,16 +1,3 @@
- // Initialize Firebase
- var config = {
-    apiKey: "AIzaSyAUbsJcyadBDoOGF24ajS7SC3Q7KweP_AY",
-    authDomain: "bootcamp-project1-504c8.firebaseapp.com",
-    databaseURL: "https://bootcamp-project1-504c8.firebaseio.com",
-    projectId: "bootcamp-project1-504c8",
-    storageBucket: "",
-    messagingSenderId: "452720723166"
-  };
-
-firebase.initializeApp(config);
-
-var database = firebase.database();
 
 function dropdown() {
     for(var i = 0; i < parkNames.length; i++) {
@@ -69,7 +56,7 @@ function parks(element) {
             $info.append(description, directions, directionsURL, weather, website);
 
             $('#search-results').append($name, $info);
-            latLong = response.data[0].latLong;
+            var latLong = response.data[0].latLong;
 
             var input = latLong.split(',');
             console.log(input);
@@ -84,6 +71,9 @@ function parks(element) {
             appObj.lastParkLong = long;
 
             trails();
+
+            $('#itinerary-add-btn').prop('disabled', false);
+            
         });
 };
 
@@ -145,7 +135,6 @@ $('#park-search-btn').on('click', myFunction);
 $('#myDropdown').on('click', 'p.list', function() {
     $('#myDropdown').toggle('hide');
     parks($(this));
+    console.log('dropdown-click',this);
     unsplash($(this));
-
 });
-

@@ -6,3 +6,50 @@
     margin: 15px;
     padding: 15px;
 }
+
+
+/* itinerary */
+
+h3 {
+    display: inline;
+    margin-left: 30px;
+}
+#itinerary-add-btn {
+    margin: 20px 0px;
+}
+
+#itinerary-container {
+    background-color: rgba(30, 39, 22, .2);
+    width: 60%;
+    margin-bottom: 100px;
+}
+.itinerary-view-head .itinerary-view {
+    background-color: rgba(30, 39, 22, .8);
+    font-weight: bold;
+    color: white;
+}
+#itinerary-data-head {
+    background-color: rgba(30, 39, 22, .6);
+    padding-left: 10px 0px 0px 10px;
+    color: white;
+}
+.itinerary-data-row {
+    height: 50px;
+    background-color: rgba(30, 39, 22, .4);
+    color: black;
+    font-weight: bold;
+    padding-top: 10px;
+    opacity: .8;
+    vertical-align: middle;
+}
+.itinerary-data-row:hover {
+    opacity: 1;
+}
+.itinerary-remove {
+    color: red;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.itinerary-remove:hover {
+    opacity: 1.0;
+}
