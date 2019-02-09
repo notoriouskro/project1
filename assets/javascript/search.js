@@ -1,4 +1,12 @@
 
+function dropdown1() {
+    for(var i = 0; i < parkNames.length; i++) {
+        var $p = $('<p class="list">');
+        $p.text(parkNames[i]);
+        $('#myDropdown1').append($p);
+    }
+};
+
 function dropdown() {
     for(var i = 0; i < parkNames.length; i++) {
         var $p = $('<p class="list">');
@@ -7,10 +15,15 @@ function dropdown() {
     }
 };
 
+function myFunction1() {
+    $('#myDropdown1').toggle('show');
+    dropdown1();
+};
+
 function myFunction() {
     $('#myDropdown').toggle('show');
     dropdown();
-};
+}
 
 function filterFunction() {
     var input = $('#myInput').val();
@@ -130,15 +143,24 @@ function trails() {
 };
 
 $('#park-search-btn').on('click', function(){
+    myFunction1();
+});
+
+$('#navbarDropdown').on('click', function(){
     myFunction();
+});
+
+$('#myDropdown1').on('click', 'p.list', function() {
+    $('#myDropdown1').toggle('hide');
+    $('#navbarDropdown').css({'display':'block'});
+    $('#initial').css({'display':'none'});
+    parks($(this));
+    unsplash($(this));
 });
 
 $('#myDropdown').on('click', 'p.list', function() {
     $('#myDropdown').toggle('hide');
-    $('#initial').css({'display':'none'});
     parks($(this));
     unsplash($(this));
-
-
 });
 

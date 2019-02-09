@@ -3,7 +3,6 @@
     width: 75%;
 }
 
-
 .navbar-brand {
     /* font-family: 'Raleway Dots', cursive; */
     font-family: 'Martel', serif;
@@ -22,6 +21,20 @@
 .display-logo {
     position: relative;
     top: -450px;
+}
+
+#navbarDropdown {
+    display: none;
+}
+
+#myDropdown {
+    position: absolute;
+    background-color: #f6f6f6;
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 20;
 }
 
 h1 {
