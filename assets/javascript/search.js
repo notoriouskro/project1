@@ -1,24 +1,24 @@
 
 function dropdown1() {
-    for(var i = 0; i < parkNames.length; i++) {
+    for (var i = 0; i < parkNames.length; i++) {
         var $p = $('<p class="list">');
         $p.text(parkNames[i]);
         $('#myDropdown1').append($p);
     }
-};
+}
 
 function dropdown() {
-    for(var i = 0; i < parkNames.length; i++) {
+    for (var i = 0; i < parkNames.length; i++) {
         var $p = $('<p class="list">');
         $p.text(parkNames[i]);
         $('#myDropdown').append($p);
     }
-};
+}
 
 function myFunction1() {
     $('#myDropdown1').toggle('show');
     dropdown1();
-};
+}
 
 function myFunction() {
     $('#myDropdown').toggle('show');
@@ -31,12 +31,12 @@ function filterFunction() {
     for (var i = 0; i < $('#myDropdown').length; i++) {
         var txtValue = $('p.list').text();
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        $('<p>').css({'display': ''});
+            $('<p>').css({ 'display': '' });
         } else {
-        $('<p>').css({'display':'none'});
+            $('<p>').css({ 'display': 'none' });
         }
     }
-};
+}
 
 function unsplash(input) {
     console.log('unsplash: ' + input);
@@ -46,6 +46,7 @@ function unsplash(input) {
     $.ajax({
         url: queryURL,
         method: "GET",
+
     }).then(function(response){
         console.log(response);
         for(var i = 0; i < 1; i++){
@@ -73,6 +74,7 @@ function parks(parkName) {
     $.ajax({
         url: queryURL,
         method: "GET",
+
     }).then(function(response){
         console.log(response);
     
@@ -112,10 +114,67 @@ function parks(parkName) {
         var long = input[1].substring(6,18);
         console.log('longitude: ' + long);
 
+     
+
+            $('#search-results').append($name, $info);
+            var latLong = response.data[0].latLong;
+
+            var input = latLong.split(',');
+            console.log(input);
+            var lat = input[0].substring(4,16);
+            console.log('latitude: ' + lat);
+            var long = input[1].substring(6,18);
+            console.log('longitude: ' + long);
+
+            trails();
+
+            appObj.lastParkCode = parkCode;
+            appObj.lastParkName = parkName;
+            appObj.lastParkLat = lat;
+            appObj.lastParkLong = long;
+
+            weatherObj.getWeather()
+
+            trails();
+
+            $('#itinerary-add-btn').prop('disabled', false);
+            
+            console.log('about to call weather');
+            weatherObj.callHomeWeather();
+
+        });
+};
+
+        var name = response.data[0].name;
+        var $name = $('<h1 id="h1-park">');
+        $name.text(name);
+
+        var description = $('<p>' + response.data[0].description + '</p>');
+        var directions = $('<p>' + response.data[0].directionsInfo + '</p>');
+        var directionsURL = $('<a href="' + response.data[0].directionsUrl + '">Directions<a>');
+        var weather = $('<p>' + response.data[0].weatherInfo + '</p>');
+        var website = $('<a href="' + response.data[0].url + '">Park Website<a>');
+        var $info = $('<div id="info">');
+        $info.append(description, directions, directionsURL, weather, website);
+
+        $('#search-results').append($name, $info);
+        var latLong = response.data[0].latLong;
+
+        var input = latLong.split(',');
+        console.log(input);
+        var lat = input[0].substring(4, 16);
+        console.log('latitude: ' + lat);
+        var long = input[1].substring(6, 18);
+        console.log('longitude: ' + long);
+
+        // trails();
+
+
         appObj.lastParkCode = parkCode;
         appObj.lastParkName = parkName;
         appObj.lastParkLat = lat;
         appObj.lastParkLong = long;
+
 
         // weatherObj.getWeather()
 
@@ -124,21 +183,24 @@ function parks(parkName) {
         weatherObj.callHomeWeather();
 
         trails();
+
     });
 };
 
 function trails() {
     var lat = appObj.lastParkLat;
     var long = appObj.lastParkLong;
-    var queryURL = 'https://www.hikingproject.com/data/get-trails?lat='+ lat + '&lon=' + long + '&maxDistance=10&key=200415723-df92bbbf592b6baa4ec5ef44ab0ffed8';
+    var queryURL = 'https://www.hikingproject.com/data/get-trails?lat=' + lat + '&lon=' + long + '&maxDistance=10&key=200415723-df92bbbf592b6baa4ec5ef44ab0ffed8';
 
     $.ajax({
         url: queryURL,
         method: "GET",
         crossOrigin: true,
+
     }).then(function(response){
         console.log(response);
         for(var i = 0; i < response.trails.length; i++){
+
             var $trail = $('<div id="trail">');
 
             var $img = $('<img id="trail-img" src="' + response.trails[i].imgSqSmall + '">');
@@ -152,7 +214,9 @@ function trails() {
             var ascent = $('<p>Ascent: ' + response.trails[i].ascent + 'ft</p>');
             var altitude = $('<p>Highest Point: ' + response.trails[i].high + 'ft</p>');
             var url = $('<a href="' + response.trails[i].url + '">View Trail Map</a>');
+
             $divSummary.append(name, description) 
+
             $divDetails.append(difficulty, length, ascent, altitude, url);
             $trail.append($divSummary, $divDetails, $img);
             $allTrails = $('<div id="all-trails"');
@@ -162,28 +226,32 @@ function trails() {
     });
 };
 
-$('#park-search-btn').on('click', function(){
+$('#park-search-btn').on('click', function () {
     myFunction1();
 
-});$('#myDropdown1').on('click', 'p.list', function() {
+}); $('#myDropdown1').on('click', 'p.list', function () {
     $('#search-results').empty();
     $('#myDropdown1').toggle('hide');
+
     $('#navbarDropdown').css({'display':'block'});
     $('#initial').css({'display':'none'});
     console.log('dropdown-click',this);
     unsplash($(this).text());
     parks($(this).text());
+
 });
 
-$('#navbarDropdown').on('click', function(){
+$('#navbarDropdown').on('click', function () {
     myFunction();
 });
 
-$('#myDropdown').on('click', 'p.list', function() {
+$('#myDropdown').on('click', 'p.list', function () {
     $('#search-results').empty();
     $('#myDropdown').toggle('hide');
+
     unsplash($(this).text());
     parks($(this).text());  
+
 });
 
 $('.navbar-brand').on('click', function(){

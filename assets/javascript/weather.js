@@ -1,18 +1,18 @@
-var weatherObj = {
 
+
+var weatherObj = {
     callHomeWeather: function () {
         var lat = appObj.lastParkLat;
         var long = appObj.lastParkLong;
-        var today = moment().format('MM/DD/YYYY');
+        var today = moment.format('02/09/2019','MM/DD/YYYY');
+
         console.log('today',today);
         weatherObj.getWeather(lat, long, today, today,'home');
     },
     getWeather: function (lat,long,start,end,target) {
 
-        console.log("Clicked!");
         var APIKey = "8a90078f604cf4b9108fb023de777c1a";
         var city = $('#park-search-val').val();
-        console.log('city',city);
 
         var queryURL = 'https://api.aerisapi.com/forecasts/' + lat + ', ' + long + '?&client_id=8I6t90Z8W84ZVlcgjzpqs&client_secret=8KAQf3xSfGPQSCzL7jXJ4AdUe3JMLajykSLvjuq6&from=' + start + '&to=' + end + '&filter=day';
 
@@ -48,7 +48,7 @@ var weatherObj = {
                 div.append(humid);
                 img.attr('src', weatherIcon);
                 div.append(img);
-                console.log('target',target);
+
                 if(target === 'home') {
                     $('#home-weather-info').append(div);
                 } else {
@@ -57,4 +57,6 @@ var weatherObj = {
             }
         });
     }
+
 };
+
