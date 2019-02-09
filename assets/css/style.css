@@ -65,23 +65,22 @@ i {
     z-index: 1;
 }
 
-#h1-park{
+.main-img {
+    width: 100%;
+}
+
+#h1-park {
     font-size: 72pt;
     font-weight: normal;
     font-family: 'Martel', serif;
-    position: absolute;
-    top: 250px;
+    position: relative;
+    top: -600px;
     z-index: 2;
-    color: white
+    color: white;
 }
 
 #itinerary-add-btn {
 
-}
-
-.main-img {
-    position: relative;
-    width: 100%;
 }
 
 .container {
@@ -103,9 +102,6 @@ i {
     overflow: scroll;
 }
 
-#weather-info {
-    position: absolute;
-}
 
 #itinerary {
     position: absolute;
@@ -118,7 +114,7 @@ i {
 #trail-img {
     float: left;
 }
-#weatherDiv{
+#home-weather-info{
     float: left;
     margin: 15px;
     padding: 15px;

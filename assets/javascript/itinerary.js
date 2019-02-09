@@ -1,4 +1,3 @@
-
 var itineraryObj = {
 
     // assignAdd: function (parkIdx) {
