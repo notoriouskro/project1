@@ -1,19 +1,15 @@
 
-
 var weatherObj = {
     callHomeWeather: function () {
         var lat = appObj.lastParkLat;
         var long = appObj.lastParkLong;
         var today = moment.format('02/09/2019','MM/DD/YYYY');
-
         console.log('today',today);
         weatherObj.getWeather(lat, long, today, today,'home');
     },
     getWeather: function (lat,long,start,end,target) {
-
         var APIKey = "8a90078f604cf4b9108fb023de777c1a";
         var city = $('#park-search-val').val();
-
         var queryURL = 'https://api.aerisapi.com/forecasts/' + lat + ', ' + long + '?&client_id=8I6t90Z8W84ZVlcgjzpqs&client_secret=8KAQf3xSfGPQSCzL7jXJ4AdUe3JMLajykSLvjuq6&from=' + start + '&to=' + end + '&filter=day';
 
         // We then created an AJAX call
@@ -57,6 +53,4 @@ var weatherObj = {
             }
         });
     }
-
 };
-

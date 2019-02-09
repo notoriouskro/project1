@@ -1,6 +1,6 @@
 /* Dropdown Button */
 .dropbtn {
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255,255,255,.5);
     border: white solid 1pt;
     width: 100%;
     color: grey;
@@ -12,7 +12,7 @@
   
   /* Dropdown button on hover & focus */
   .dropbtn:hover, .dropbtn:focus {
-    background-color: rgba(255,255,255,1);
+    background-color: rgba(255,255,255,.8);
   }
   
   /* The search field */
@@ -62,7 +62,7 @@
   }
   
   /* Change color of dropdown links on hover */
-  .dropdown1-content p:hover {border-bottom: grey dotted 1pt;}
+  .dropdown1-content p:hover {background-color: #f1f1f1}
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
