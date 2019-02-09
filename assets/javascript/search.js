@@ -1,16 +1,3 @@
- // Initialize Firebase
- var config = {
-    apiKey: "AIzaSyAUbsJcyadBDoOGF24ajS7SC3Q7KweP_AY",
-    authDomain: "bootcamp-project1-504c8.firebaseapp.com",
-    databaseURL: "https://bootcamp-project1-504c8.firebaseio.com",
-    projectId: "bootcamp-project1-504c8",
-    storageBucket: "",
-    messagingSenderId: "452720723166"
-  };
-
-firebase.initializeApp(config);
-
-var database = firebase.database();
 
 function dropdown() {
     for(var i = 0; i < parkNames.length; i++) {
@@ -142,12 +129,16 @@ function trails() {
         });
 };
 
-$('#park-search-btn').on('click', myFunction);
+$('#park-search-btn').on('click', function(){
+    myFunction();
+});
 
 $('#myDropdown').on('click', 'p.list', function() {
     $('#myDropdown').toggle('hide');
+    $('#initial').css({'display':'none'});
     parks($(this));
     unsplash($(this));
+
 
 });
 

@@ -9,29 +9,91 @@
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
+    crossorigin="anonymous">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Martel|Raleway+Dots|Ruda:900|Shrikhand" rel="stylesheet">
 
     <!-- stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dropdown.css">
 
-
 </head>
 
 <body>
-    <header>
-        <h1>Footprint</h1>
-        <p>your national park trip planner</p>
-    </header>
-    <nav></nav>
-    <div id="main-img"></div>
-    
-    <div class="dropdown">
-        <button class="dropbtn" id="park-search-btn" class="dropbtn">Find a Park</button>
-        <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search.." id="myInput">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Footprint</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Log In</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
+      
+    <header id="initial">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item active" style="background-image: url('assets/images/pablo-fierro-683147-unsplash.jpg')">
+                        <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-logo">Footprint</h1>
+                        <h2 class="display-4">Yosemite</h2>
+                        <p class="lead">Photo: Pablo Fierro</p>
+                    </div>
+                </div>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-4">Second Slide</h2>
+                        <p class="lead">This is a description for the second slide.</p>
+                    </div>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h2 class="display-4">Third Slide</h2>
+                    <p class="lead">This is a description for the third slide.</p>
+                </div>
+            </div>
+        </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                    </a>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" id="park-search-btn" class="dropbtn">Select a Park
+                    <!-- <i class="fas fa-chevron-down"></i> -->
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="myInput">
+                </div>
+            </div>
+
+    </header>
+    
+    
 
     <div id="search-results">
 
