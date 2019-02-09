@@ -106,7 +106,6 @@ function parks(element) {
 
             weatherObj.getWeather()
 
-<<<<<<< HEAD
             trails();
 
             $('#itinerary-add-btn').prop('disabled', false);
@@ -126,11 +125,10 @@ function unsplash(element) {
         }).then(function(response){
             console.log(response);
             for(var i = 0; i < 1; i++){
-            $('#search-results').append('<img src="' + response.results[i].urls.regular + '">');
+                var mainImg = $('<div id="main-img-container">');
+                mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
+                $('#main-image').append(mainImg);
             }
-=======
-            
->>>>>>> css for merge
         });
 };
 
@@ -177,35 +175,19 @@ $('#park-search-btn').on('click', function(){
     $('#myDropdown1').toggle('hide');
     $('#navbarDropdown').css({'display':'block'});
     $('#initial').css({'display':'none'});
-<<<<<<< HEAD
-    parks($(this));
     console.log('dropdown-click',this);
-    unsplash($(this));
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
->>>>>>> inital page css
-=======
-=======
     unsplash($(this));
     parks($(this));
 });
 
 $('#navbarDropdown').on('click', function(){
     myFunction();
->>>>>>> css for merge
 });
 
 $('#myDropdown').on('click', 'p.list', function() {
     $('#search-results').empty();
     $('#myDropdown').toggle('hide');
     unsplash($(this));
-<<<<<<< HEAD
->>>>>>> navbar parks dropdown functional
-=======
     parks($(this));
     
->>>>>>> css for merge
 });
