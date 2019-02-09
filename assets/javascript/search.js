@@ -132,11 +132,19 @@ function trails() {
         });
 };
 
-$('#park-search-btn').on('click', myFunction);
+$('#park-search-btn').on('click', function(){
+    myFunction();
+});
 
 $('#myDropdown').on('click', 'p.list', function() {
     $('#myDropdown').toggle('hide');
+    $('#initial').css({'display':'none'});
     parks($(this));
     console.log('dropdown-click',this);
     unsplash($(this));
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> inital page css
 });
