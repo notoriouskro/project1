@@ -8,6 +8,17 @@
     display: none;
 }
 
+#myDropdown {
+    width: 200px;
+    max-height: 500px;
+    overflow: scroll;
+    padding: 20px;
+}
+
+.list:hover {
+    border-bottom: grey dotted 1pt;
+}
+
 .carousel-item {
     height: 100vh;
     min-height: 350px;

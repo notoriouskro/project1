@@ -29,7 +29,7 @@ function filterFunction() {
     var input = $('#myInput').val();
     var filter = input.toUpperCase();
     for (var i = 0; i < $('#myDropdown').length; i++) {
-        var txtValue = $('<p>').text();
+        var txtValue = $('p.list').text();
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
         $('<p>').css({'display': ''});
         } else {
@@ -188,6 +188,10 @@ $('#myDropdown').on('click', 'p.list', function() {
     $('#search-results').empty();
     $('#myDropdown').toggle('hide');
     unsplash($(this));
-    parks($(this));
-    
+    parks($(this));  
+});
+
+$('.navbar-brand').on('click', function(){
+    $('#search-results').empty();
+    $('#initial').css({'display':'inline'});
 });
