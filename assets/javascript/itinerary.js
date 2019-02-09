@@ -111,6 +111,7 @@ $('#itinerary-add-btn').on('click', function () {
     var parkName = appObj.lastParkName;
     var parkLat = appObj.lastParkLat;
     var parkLong = appObj.lastParkLong;
+
     var itineraryStart = '02/15/2019';//moment();
     var itineraryEnd = '02/19/2019'; //moment();
     var itineraryDuration = 1; //this will be calculated
@@ -148,7 +149,7 @@ $('#editItinModal').on('show.bs.modal', function (event) {
         var long = snapshot.val().parkLong;
         var start = snapshot.val().itineraryStart;
         var end = snapshot.val().itineraryEnd;
-        console.log('start', start, 'end', end);
+
 
         $('#editItinModalLabel').text(snapshot.val().parkName);
         $('#datepicker').val(start);

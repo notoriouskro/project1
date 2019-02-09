@@ -72,8 +72,50 @@ function parks(element) {
     $.ajax({
         url: queryURL,
         method: "GET",
-    }).then(function (response) {
-        console.log(response);
+
+      }).then(function(response){
+            console.log(response);
+        
+            var name = response.data[0].name;
+            var $name = $('<h1 id="h1-park">');
+            $name.text(name);
+
+            var description = $('<p>' + response.data[0].description + '</p>');
+            var directions = $('<p>' + response.data[0].directionsInfo + '</p>');
+            var directionsURL = $('<a href="' + response.data[0].directionsUrl + '">Directions<a>');
+            var weather = $('<p>' + response.data[0].weatherInfo + '</p>');
+            var website = $('<a href="' + response.data[0].url + '">Park Website<a>');
+            var $info = $('<div id="info">');
+            $info.append(description, directions, directionsURL, weather, website);
+
+            $('#search-results').append($name, $info);
+            var latLong = response.data[0].latLong;
+
+            var input = latLong.split(',');
+            console.log(input);
+            var lat = input[0].substring(4,16);
+            console.log('latitude: ' + lat);
+            var long = input[1].substring(6,18);
+            console.log('longitude: ' + long);
+
+            trails();
+
+            appObj.lastParkCode = parkCode;
+            appObj.lastParkName = parkName;
+            appObj.lastParkLat = lat;
+            appObj.lastParkLong = long;
+
+            weatherObj.getWeather()
+
+            trails();
+
+            $('#itinerary-add-btn').prop('disabled', false);
+            
+            console.log('about to call weather');
+            weatherObj.callHomeWeather();
+
+        });
+};
 
         var name = response.data[0].name;
         var $name = $('<h1 id="h1-park">');
