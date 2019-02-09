@@ -13,7 +13,7 @@ var itineraryObj = {
         var row = $('<div>');
         var key = snapshot.key;
         console.log('key', key);
-        row.attr({ class: 'row itinerary-data-row', id: key });
+        row.attr({ class: 'row itinerary-data-row', id: key, 'data-toggle': 'modal', 'data-target': '#editItinModal', 'data-key': key });
 
         var buttdiv = $('<div>');
         buttdiv.attr({ class: 'col-md-1' });
@@ -111,8 +111,9 @@ $('#itinerary-add-btn').on('click', function () {
     var parkName = appObj.lastParkName;
     var parkLat = appObj.lastParkLat;
     var parkLong = appObj.lastParkLong;
-    var itineraryStart = '02/05/2019';//moment();
-    var itineraryEnd = '02/09/2019'; //moment();
+
+    var itineraryStart = '02/15/2019';//moment();
+    var itineraryEnd = '02/19/2019'; //moment();
     var itineraryDuration = 1; //this will be calculated
 
     database.ref().push({
@@ -148,6 +149,7 @@ $('#editItinModal').on('show.bs.modal', function (event) {
         var long = snapshot.val().parkLong;
         var start = snapshot.val().itineraryStart;
         var end = snapshot.val().itineraryEnd;
+
 
         $('#editItinModalLabel').text(snapshot.val().parkName);
         $('#datepicker').val(start);
