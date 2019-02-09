@@ -110,6 +110,9 @@ function parks(element) {
 
             $('#itinerary-add-btn').prop('disabled', false);
             
+            console.log('about to call weather');
+            weatherObj.callHomeWeather();
+
         });
 };
 

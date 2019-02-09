@@ -111,8 +111,8 @@ $('#itinerary-add-btn').on('click', function () {
     var parkName = appObj.lastParkName;
     var parkLat = appObj.lastParkLat;
     var parkLong = appObj.lastParkLong;
-    var itineraryStart = '02/07/2019';//moment();
-    var itineraryEnd = '02/08/2019'; //moment();
+    var itineraryStart = '02/05/2019';//moment();
+    var itineraryEnd = '02/09/2019'; //moment();
     var itineraryDuration = 1; //this will be calculated
 
     database.ref().push({
@@ -143,19 +143,21 @@ $('#editItinModal').on('show.bs.modal', function (event) {
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this);
+
+        var lat = snapshot.val().parkLat;
+        var long = snapshot.val().parkLong;
+        var start = snapshot.val().itineraryStart;
+        var end = snapshot.val().itineraryEnd;
+
         $('#editItinModalLabel').text(snapshot.val().parkName);
-        $('#datepicker').val(snapshot.val().itineraryStart);
-        $('#end-date').val(snapshot.val().itineraryEnd);
+        $('#datepicker').val(start);
+        $('#end-date').val(end);
         $('#num-days').val(snapshot.val().itineraryDuration);
-        //open modal form
 
         //get weather
-        // weatherObj.getWeather(parkLat,parkLong,startDate,endDate);
-        //hold for modal form
-        // $('#itinerary-name').val(snapshot.val().parkName);
-        // $('#itinerary-start').val(snapshot.val().itineraryStart);
-        // $('#itinerary-end').val(snapshot.val().itineraryEnd);
-        // $('#itinerary-duration').val(snapshot.val().itineraryDuration);
+        weatherObj.getWeather(lat, long, start, end, 'modal');
+
+        //open modal form
 
     });
 
