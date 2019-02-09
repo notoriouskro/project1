@@ -16,8 +16,12 @@
 
 .display-logo {
     position: relative;
+<<<<<<< HEAD
     top: -750px;
     text-align: center;
+=======
+    top: -450px;
+>>>>>>> 218c5989ae932184ac9e86cc90a0cf4932d6aa20
 }
 
 #navbarDropdown {
@@ -25,7 +29,11 @@
 }
 
 #myDropdown {
+<<<<<<< HEAD
     position: relative;
+=======
+    position: absolute;
+>>>>>>> 218c5989ae932184ac9e86cc90a0cf4932d6aa20
     background-color: #f6f6f6;
     width: 100%;
     max-height: 500px;
@@ -38,7 +46,10 @@ h1 {
     font-size: 100pt;
     font-weight: normal;
     font-family: 'Martel', serif;
+<<<<<<< HEAD
     color: white;
+=======
+>>>>>>> 218c5989ae932184ac9e86cc90a0cf4932d6aa20
     /* font-family: 'Ruda', sans-serif; */
     /* font-family: 'Shrikhand', cursive; */
     /* font-family: 'Raleway Dots', cursive; */
