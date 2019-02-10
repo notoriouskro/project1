@@ -25,6 +25,7 @@ function myFunction() {
     dropdown();
 }
 
+<<<<<<< HEAD
 function filterFunction() {
     var input = $('#myInput').val();
     var filter = input.toUpperCase();
@@ -37,6 +38,22 @@ function filterFunction() {
         }
     }
 }
+=======
+// function filterFunction() {
+//     var input = $('#myInput').val();
+//     var filter = input.toUpperCase();
+//     for (var i = 0; i < $('#myDropdown').length; i++) {
+//         var txtValue = $('p.list').text();
+//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//         $('<p>').css({'display': ''});
+//         } else {
+//         $('<p>').css({'display':'none'});
+//         }
+//     }
+// };
+
+// $('#myInput').on('keyup', filterFunction);
+>>>>>>> merging
 
 function unsplash(element) {
     var input = element.text();
@@ -49,15 +66,25 @@ function unsplash(element) {
         method: "GET",
     }).then(function (response) {
         console.log(response);
+<<<<<<< HEAD
         for (var i = 0; i < 1; i++) {
             var mainImg = $('<div id="main-img-container">');
             mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
             $('#main-image').append(mainImg);
+=======
+        for(var i = 0; i < 1; i++){
+            // var $div = $('<div>');
+            // $div.attr({id:'main-img-container'});
+            var $img = $('<img>');
+            $img.attr({class: 'main-img'});
+            $img.attr({src: response.results[i].urls.regular});
+            $('#main-img-container').append($img);
+>>>>>>> merging
         }
     });
 };
 
-$('#myInput').on('keyup', filterFunction);
+
 
 function parks(element) {
     var parkName = element.text();
