@@ -79,9 +79,9 @@ function parks(element) {
       }).then(function(response){
             console.log(response);
         
-            var name = response.data[0].name;
-            var $name = $('<h1 id="h1-park">');
-            $name.text(name);
+            var name = $('<h1>');
+            name.attr({id:'h1-park'});
+            name.text(response.data[0].name);
 
             var description = $('<p>');
             description.text(response.data[0].description);
@@ -90,7 +90,8 @@ function parks(element) {
             directions.attr({href: response.data[0].directionsInfo});
             directions.text('Park Directions');
 
-            var weather = $('<p>' + response.data[0].weatherInfo + '</p>');
+            var weather = $('<p>');
+            weather.text(response.data[0].weatherInfo);
 
             var website = $('<a>');
             website.attr({href: response.data[0].url});
@@ -98,7 +99,7 @@ function parks(element) {
 
             $info.append(description, directions, directionsURL, weather, website);
 
-            $('#search-results').append($name, $info);
+            $('#search-results').append(name, $info);
             
             var latLong = response.data[0].latLong;
             var input = latLong.split(',');
@@ -135,23 +136,50 @@ function trails() {
     }).then(function (response) {
         console.log(response);
         for (var i = 0; i < response.trails.length; i++) {
-            var $trail = $('<div id="trail">');
 
-            var $img = $('<img id="trail-img" src="' + response.trails[i].imgSqSmall + '">');
+            var $allTrails = $('<div>');
+            $allTrails.attr({id: 'all-trails'});
 
-            var $divSummary = $('<div id="summary">');
-            var $divDetails = $('<div id="details">');
-            var name = $('<h3>' + response.trails[i].name + '</h3>');
-            var description = $('<p>' + response.trails[i].summary + '</p>');
-            var difficulty = $('<p>Difficulty: ' + response.trails[i].difficulty + '</p>');
-            var length = $('<p>Length: ' + response.trails[i].length + 'mi</p>');
-            var ascent = $('<p>Ascent: ' + response.trails[i].ascent + 'ft</p>');
-            var altitude = $('<p>Highest Point: ' + response.trails[i].high + 'ft</p>');
-            var url = $('<a href="' + response.trails[i].url + '">View Trail Map</a>');
-            $divSummary.append(name, description)
-            $divDetails.append(difficulty, length, ascent, altitude, url);
-            $trail.append($divSummary, $divDetails, $img);
-            $allTrails = $('<div id="all-trails"');
+            var $trail = $('<div>');
+            $trail.attr({id: 'trail'});
+
+            var $img = $('<img>');
+            $img.attr({src: response.trails[i].imgSqSmall, id: 'trail-img'});
+
+            var $summary = $('<div>');
+            $summary.attr({id: 'summary'});
+
+            var $details = $('<div>');
+            $details.attr({id: 'details'});
+
+            var $name = $('<h3>');
+            $name.text(response.trails[i].name);
+
+            var $description = $('<p>');
+            $description.text(response.trails[i].summary);
+
+            var $difficulty = $('<p>');
+            $difficulty.text(response.trails[i].difficulty);
+
+            var $length = $('<p>');
+            $length.text(response.trails[i].length);
+
+            var $ascent = $('<p>');
+            $ascent.text(response.trails[i].ascent);
+
+            var $altitude = $('<p>');
+            $altitude.text(response.trails[i].high)''
+
+            var $url = $('<a>');
+            $url.attr({href: response.trails[i].url});
+            $url.text('Trail Map');
+
+            $summary.append($name, $description);
+
+            $details.append($difficulty, $length, $ascent, $altitude, $url);
+
+            $trail.append($summary, $details, $img);
+
             $allTrails.append($trail);
         }
         $('#search-results').append($allTrails);
