@@ -25,20 +25,6 @@ function myFunction() {
     dropdown();
 }
 
-<<<<<<< HEAD
-function filterFunction() {
-    var input = $('#myInput').val();
-    var filter = input.toUpperCase();
-    for (var i = 0; i < $('#myDropdown').length; i++) {
-        var txtValue = $('<p>').text();
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            $('<p>').css({ 'display': '' });
-        } else {
-            $('<p>').css({ 'display': 'none' });
-        }
-    }
-}
-=======
 // function filterFunction() {
 //     var input = $('#myInput').val();
 //     var filter = input.toUpperCase();
@@ -53,7 +39,6 @@ function filterFunction() {
 // };
 
 // $('#myInput').on('keyup', filterFunction);
->>>>>>> merging
 
 function unsplash(element) {
     var input = element.text();
@@ -66,12 +51,6 @@ function unsplash(element) {
         method: "GET",
     }).then(function (response) {
         console.log(response);
-<<<<<<< HEAD
-        for (var i = 0; i < 1; i++) {
-            var mainImg = $('<div id="main-img-container">');
-            mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
-            $('#main-image').append(mainImg);
-=======
         for(var i = 0; i < 1; i++){
             // var $div = $('<div>');
             // $div.attr({id:'main-img-container'});
@@ -79,12 +58,9 @@ function unsplash(element) {
             $img.attr({class: 'main-img'});
             $img.attr({src: response.results[i].urls.regular});
             $('#main-img-container').append($img);
->>>>>>> merging
         }
     });
 };
-
-
 
 function parks(element) {
     var parkName = element.text();
@@ -107,17 +83,24 @@ function parks(element) {
             var $name = $('<h1 id="h1-park">');
             $name.text(name);
 
-            var description = $('<p>' + response.data[0].description + '</p>');
-            var directions = $('<p>' + response.data[0].directionsInfo + '</p>');
-            var directionsURL = $('<a href="' + response.data[0].directionsUrl + '">Directions<a>');
+            var description = $('<p>');
+            description.text(response.data[0].description);
+
+            var directions = $('<a>');
+            directions.attr({href: response.data[0].directionsInfo});
+            directions.text('Park Directions');
+
             var weather = $('<p>' + response.data[0].weatherInfo + '</p>');
-            var website = $('<a href="' + response.data[0].url + '">Park Website<a>');
-            var $info = $('<div id="info">');
+
+            var website = $('<a>');
+            website.attr({href: response.data[0].url});
+            website.text('Park Website');
+
             $info.append(description, directions, directionsURL, weather, website);
 
             $('#search-results').append($name, $info);
+            
             var latLong = response.data[0].latLong;
-
             var input = latLong.split(',');
             console.log(input);
             var lat = input[0].substring(4,16);
@@ -132,55 +115,12 @@ function parks(element) {
             appObj.lastParkLat = lat;
             appObj.lastParkLong = long;
 
-            weatherObj.getWeather()
-
-            trails();
-
             $('#itinerary-add-btn').prop('disabled', false);
             
             console.log('about to call weather');
             weatherObj.callHomeWeather();
 
         });
-};
-
-        var name = response.data[0].name;
-        var $name = $('<h1 id="h1-park">');
-        $name.text(name);
-
-        var description = $('<p>' + response.data[0].description + '</p>');
-        var directions = $('<p>' + response.data[0].directionsInfo + '</p>');
-        var directionsURL = $('<a href="' + response.data[0].directionsUrl + '">Directions<a>');
-        var weather = $('<p>' + response.data[0].weatherInfo + '</p>');
-        var website = $('<a href="' + response.data[0].url + '">Park Website<a>');
-        var $info = $('<div id="info">');
-        $info.append(description, directions, directionsURL, weather, website);
-
-        $('#search-results').append($name, $info);
-        var latLong = response.data[0].latLong;
-
-        var input = latLong.split(',');
-        console.log(input);
-        var lat = input[0].substring(4, 16);
-        console.log('latitude: ' + lat);
-        var long = input[1].substring(6, 18);
-        console.log('longitude: ' + long);
-
-        // trails();
-
-        appObj.lastParkCode = parkCode;
-        appObj.lastParkName = parkName;
-        appObj.lastParkLat = lat;
-        appObj.lastParkLong = long;
-
-        // trails();
-
-        $('#itinerary-add-btn').prop('disabled', false);
-
-        console.log('about to call weather');
-        weatherObj.callHomeWeather();
-
-    });
 };
 
 function trails() {
