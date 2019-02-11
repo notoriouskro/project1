@@ -1,6 +1,6 @@
 
 function dropdown1() {
-    for (var i = 0; i < parkNames.length; i++) {
+    for(var i = 0; i < parkNames.length; i++) {
         var $p = $('<p class="list">');
         $p.text(parkNames[i]);
         $('#myDropdown1').append($p);
@@ -8,7 +8,7 @@ function dropdown1() {
 };
 
 function dropdown() {
-    for (var i = 0; i < parkNames.length; i++) {
+    for(var i = 0; i < parkNames.length; i++) {
         var $p = $('<p class="list">');
         $p.text(parkNames[i]);
         $('#myDropdown').append($p);
@@ -91,7 +91,7 @@ function parks(parkName) {
             $info.append(description, directions, directionsURL, weather, website);
 
             $('#search-results').append($name, $info);
-            latLong = response.data[0].latLong;
+            var latLong = response.data[0].latLong;
 
             var input = latLong.split(',');
             console.log(input);
@@ -109,14 +109,32 @@ function parks(parkName) {
             appObj.lastParkLong = long;
 
             $('#itinerary-add-btn').prop('disabled', false);
+        });
+};
+      
+function unsplash(element) {
+    var input = element.text();
+    console.log('unsplash: ' + input);
 
+    var queryURL = 'https://api.unsplash.com/search/photos?page=1&query=' + input + '&client_id=595205d0fab64dca9acc4912f7319d2869c29ff0834538b31167dbca9425a2f6&client_secret=00c14faa873902ff8dd494014545db17655595508ae0c67fe37a8774e4b7b45c';
+
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        }).then(function(response){
+            console.log(response);
+            for(var i = 0; i < 1; i++){
+                var mainImg = $('<div id="main-img-container">');
+                mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
+                $('#search-results').append(mainImg);
+            }
         });
 };
 
 function trails() {
     var lat = appObj.lastParkLat;
     var long = appObj.lastParkLong;
-    var queryURL = 'https://www.hikingproject.com/data/get-trails?lat=' + lat + '&lon=' + long + '&maxDistance=10&key=200415723-df92bbbf592b6baa4ec5ef44ab0ffed8';
+    var queryURL = 'https://www.hikingproject.com/data/get-trails?lat='+ lat + '&lon=' + long + '&maxDistance=10&key=200415723-df92bbbf592b6baa4ec5ef44ab0ffed8';
 
     $.ajax({
         url: queryURL,
@@ -171,28 +189,32 @@ function trails() {
         
         $('#search-results').append($allTrails);
     });
+
 };
 
-$('#park-search-btn').on('click', function () {
+$('#park-search-btn').on('click', function(){
     myFunction1();
 
-}); $('#myDropdown1').on('click', 'p.list', function () {
+});$('#myDropdown1').on('click', 'p.list', function() {
     $('#search-results').empty();
     $('#myDropdown1').toggle('hide');
+
     $('#navbarDropdown').css({ 'display': 'block'});
     $('#initial').css({ 'display': 'none'});
     console.log('dropdown-click', this);
     unsplash($(this).text());
     parks($(this).text());
+
 });
 
-$('#navbarDropdown').on('click', function () {
+$('#navbarDropdown').on('click', function(){
     myFunction();
 });
 
-$('#myDropdown').on('click', 'p.list', function () {
+$('#myDropdown').on('click', 'p.list', function() {
     $('#search-results').empty();
     $('#myDropdown').toggle('hide');
+
     unsplash($(this).text());
     parks($(this).text());
 
