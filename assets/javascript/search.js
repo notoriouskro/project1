@@ -92,11 +92,7 @@ function parks(element) {
             var $info = $('<div id="info">');
             $info.append(description, directions, directionsURL, weather, website);
 
-<<<<<<< HEAD
-            $('#main-search-results').append($name, $info);
-=======
             $('#search-results').append($name, $info);
->>>>>>> 48542b35dac01cb134a18bb5dec9a6685308b75c
             var latLong = response.data[0].latLong;
 
             var input = latLong.split(',');
@@ -175,7 +171,7 @@ function unsplash(element) {
             for(var i = 0; i < 1; i++){
                 var mainImg = $('<div id="main-img-container">');
                 mainImg.append('<img class="main-img" src="' + response.results[i].urls.regular + '">');
-                $('#main-search-results').append(mainImg);
+                $('#search-results').append(mainImg);
             }
         });
 };
@@ -211,7 +207,7 @@ function trails() {
                 $allTrails = $('<div id="all-trails"');
                 $allTrails.append($trail);
             }
-            $('#main-search-results).append($allTrails);
+            $('#search-results).append($allTrails);
         });
 };
 
@@ -219,7 +215,7 @@ $('#park-search-btn').on('click', function(){
     myFunction1();
 
 });$('#myDropdown1').on('click', 'p.list', function() {
-    $('#main-search-results').empty();
+    $('#search-results').empty();
     $('#myDropdown1').toggle('hide');
     $('#navbarDropdown').css({'display':'block'});
     $('#initial').css({'display':'none'});
@@ -233,7 +229,7 @@ $('#navbarDropdown').on('click', function(){
 });
 
 $('#myDropdown').on('click', 'p.list', function() {
-    $('#main-search-results').empty();
+    $('#search-results').empty();
     $('#myDropdown').toggle('hide');
     unsplash($(this));
     parks($(this));
